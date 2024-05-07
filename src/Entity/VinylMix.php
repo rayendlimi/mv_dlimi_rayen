@@ -11,7 +11,7 @@ class VinylMix
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column()]
+    #[ORM\Column]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
@@ -39,7 +39,7 @@ class VinylMix
         return $this->title;
     }
 
-    public function setTitle(string $title): self
+    public function setTitle(string $title): static
     {
         $this->title = $title;
 
@@ -51,7 +51,7 @@ class VinylMix
         return $this->description;
     }
 
-    public function setDescription(?string $description): self
+    public function setDescription(?string $description): static
     {
         $this->description = $description;
 
@@ -63,7 +63,7 @@ class VinylMix
         return $this->trackCount;
     }
 
-    public function setTrackCount(int $trackCount): self
+    public function setTrackCount(int $trackCount): static
     {
         $this->trackCount = $trackCount;
 
@@ -75,7 +75,7 @@ class VinylMix
         return $this->genre;
     }
 
-    public function setGenre(string $genre): self
+    public function setGenre(string $genre): static
     {
         $this->genre = $genre;
 
@@ -87,7 +87,7 @@ class VinylMix
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $createdAt): self
+    public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
         $this->createdAt = $createdAt;
 
