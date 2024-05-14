@@ -8,6 +8,11 @@ use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @extends ServiceEntityRepository<VinylMix>
+ *
+ * @method VinylMix|null find($id, $lockMode = null, $lockVersion = null)
+ * @method VinylMix|null findOneBy(array $criteria, array $orderBy = null)
+ * @method VinylMix[]    findAll()
+ * @method VinylMix[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class VinylMixRepository extends ServiceEntityRepository
 {
@@ -16,28 +21,43 @@ class VinylMixRepository extends ServiceEntityRepository
         parent::__construct($registry, VinylMix::class);
     }
 
-    //    /**
-    //     * @return VinylMix[] Returns an array of VinylMix objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('v')
-    //            ->andWhere('v.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('v.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+    public function add(VinylMix $entity, bool $flush = false): void
+    {
+        $this->getEntityManager()->persist($entity);
 
-    //    public function findOneBySomeField($value): ?VinylMix
-    //    {
-    //        return $this->createQueryBuilder('v')
-    //            ->andWhere('v.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+        if ($flush) {
+            $this->getEntityManager()->flush();
+        }
+    }
+
+    public function remove(VinylMix $entity, bool $flush = false): void
+    {
+        $this->getEntityManager()->remove($entity);
+
+        if ($flush) {
+            $this->getEntityManager()->flush();
+        }
+    }
+
+    /**
+     * @return VinylMix[] Returns an array of VinylMix objects
+     */
+    public function findAllOrderedByVotes(): array
+    {
+        return $this->createQueryBuilder('mix')
+            ->orderBy('mix.votes', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+//    public function findOneBySomeField($value): ?VinylMix
+//    {
+//        return $this->createQueryBuilder('v')
+//            ->andWhere('v.exampleField = :val')
+//            ->setParameter('val', $value)
+//            ->getQuery()
+//            ->getOneOrNullResult()
+//        ;
+//    }
 }
