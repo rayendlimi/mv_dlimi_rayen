@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class MixController extends AbstractController
 {
-    #[Route('/mix/new')]
+    #[Route('/mix/{id}')]
     public function new(EntityManagerInterface $entityManager): Response
     {
         $mix = new VinylMix();
